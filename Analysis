@@ -1,1 +1,91 @@
+# PART 1: 
+## DATA FOUNDATION 
+
+# 1. Original Data (Raw Operational Inputs)
+These are the base fields captured from customer support activity:
+Ticket ID
+Created Date / Resolved Date
+Agent
+Category (e.g., Login Issue, Payment Problem)
+Priority
+Resolution Hours
+CSAT Score (1–5)
+Channel (Chat / Email / etc.)
+Subscription Type (Free / Premium)
+## Purpose:
+Represents real operational ticket data
+Used as the source for all analysis
+
+2. Lookup Data (Enrichment Layer)
+These fields were added to enrich the dataset:
+Team (via agent mapping)
+Location
+Experience Level
+SLA Target Hours (based on priority or SLA rules)
+## Purpose:
+Adds context for segmentation
+Enables operational breakdown by team, agent, and service level
+
+3. Business Logic Columns (Calculated Fields)
+These columns convert raw data into measurable operations metrics:
+
+# SLA Status
+Measures operational performance against SLA targets
+
+=IF([@[Resolution Hours]]<=[@[SLA Target Hours]],"Met SLA","Breached SLA")
+
+# Resolution Category
+Classifies ticket resolution speed
+
+=IF([@[Resolution Hours]]<=2,"Fast",
+IF([@[Resolution Hours]]<=5,"Medium","Slow"))
+
+# CSAT Category
+Converts numeric CSAT into customer experience segments
+
+=IF([@[CSAT Score]]>=4,"Satisfied",
+IF([@[CSAT Score]]=3,"Neutral","Unsatisfied"))
+
+
+# Priority Group
+Standardizes priority levels for analysis
+
+=IF([@Priority]="High","High Priority",
+IF([@Priority]="Medium","Medium Priority","Low Priority"))
+
+# Customer Type
+Enables segmentation between Free and Premium customers
+
+=[@[Subscription Type]]
+
+# Structured analytics model
+
+✔ Operational data (tickets) 
+✔ Enriched context (teams, SLA targets) 
+✔ Business logic (SLA, CSAT, resolution speed) 
+✔ Analytical segmentation (priority, customer type, categories)
+
+## Analyst Insight
+
+Measure operational efficiency (SLA performance)
+Analyze customer experience (CSAT segmentation)
+Identify bottlenecks (resolution categories)
+Segment performance by customer type and priority
+
+## Transition to Part 2
+Now that the data foundation is complete, the next phase is:
+Pivot Table modeling
+KPI calculations
+Dashboard creation
+Slicer-driven interactivity
+Insight generation
+This is where raw data becomes a real Operations Analytics dashboard.
+
+
+
+
+
+
+
+
 
