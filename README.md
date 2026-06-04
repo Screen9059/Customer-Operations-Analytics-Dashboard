@@ -50,6 +50,9 @@ Data Cleaning
 
 # Dashboard
 Tableau
+https://public.tableau.com/app/profile/karla.matias1278/viz/CustomerOperationsAnalyticsDashboardBusinessScenario/CustomerOperationsAnalyticsDashboard
+
+
 
 
 
